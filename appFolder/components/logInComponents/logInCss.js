@@ -28,11 +28,20 @@ export default StyleSheet.create({
         marginTop: 10
     },
 
+    linkButton: {
+        flexDirection: 'row',
+        marginTop: 55
+    },
+
+    registerButton: {
+        justifyContent: 'flex-start',
+        marginLeft: 35
+    },
+
     nextButton: {
+        marginLeft: 70,
         justifyContent: 'flex-end',
         alignItems: 'flex-end',
-        width: 90,
-        backgroundColor: 'lightgreen',
     }
 
 

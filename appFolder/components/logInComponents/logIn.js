@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, Button } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import logInCss from "./logInCss";
 import { OutlinedTextField } from 'react-native-material-textfield';
+import { Button } from 'react-native-elements';
+import { toDashboard } from './logInFireBase'
 
 
 class LogIn extends Component {
@@ -58,14 +60,25 @@ class LogIn extends Component {
                         </View>
                     </View>
                     <View>
-                        
-                    </View>
-                    <View style={{ justifyContent: "flex-end", alignItems: 'flex-end', padding: 45, marginTop: 110 }}>
                         <Button
-                            title="       Next        "
-                            onPress={this.validation}
+                            title="Forgate Password"
+                            type="clear"
                         />
                     </View>
+                    <View className="linkButton" style={logInCss.linkButton}>
+                        <View className="registerButton" style={logInCss.registerButton} >
+                            <Button
+                                title="     Register       "
+                            />
+                        </View>
+                        <View className="nextButton" style={logInCss.nextButton}>
+                            <Button
+                                title="         Next          "
+                                onPress={this.submitForm}
+                            />
+                        </View>
+                    </View>
+
 
                 </View >
             </ScrollView>
@@ -108,6 +121,17 @@ class LogIn extends Component {
             errors: errors
         });
         return validform;
+    }
+
+    submitForm(event) {
+        event.preventDefault();
+        if (this.validation()) {
+            this.setState({
+                [event.target.name]: event.target.value,
+                [event.target.formvalid]: !event.target.formvalid
+            })
+            toDashboard(this.state.emailid, this.state.password);
+        }
     }
 }
 export default LogIn;

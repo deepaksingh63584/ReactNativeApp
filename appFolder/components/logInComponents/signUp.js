@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, ScrollView, Button } from 'react-native';
 import logInCss from "./logInCss";
 import { OutlinedTextField } from 'react-native-material-textfield';
+import { newUser } from './logInFireBase'
 
 
 class SignUp extends Component {
@@ -93,7 +94,7 @@ class SignUp extends Component {
                     <View style={{ justifyContent: "flex-end", alignItems: 'flex-end', padding: 45 }}>
                         <Button
                             title="       Next        "
-                            onPress={this.validation}
+                            onPress={this.register}
                         />
                     </View>
 
@@ -161,6 +162,20 @@ class SignUp extends Component {
         //console.log("hfskjidghfdosigfhdfj");
 
         return validform;
+    }
+
+    register = (event) => {
+        //console.log('resi1');
+
+        event.preventDefault();
+        if (this.validation()) {
+            this.setState({
+                [event.target.name]: event.target.value,
+                [event.target.formvalid]: !event.target.formvalid
+            })
+            //console.log('caling user data');
+            newUser(this.state.firstName, this.state.lastName, this.state.emailId, this.state.passwordItem);
+        }
     }
 }
 export default SignUp;
