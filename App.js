@@ -1,13 +1,19 @@
 import React from 'react';
+import { View, Text } from 'react-native'
 import LogIn from './appFolder/components/logInComponents/logIn';
 import SignUp from './appFolder/components/logInComponents/signUp';
 import ForgatePassword from './appFolder/components/logInComponents/forgatePassword';
+import RouteApp from './appFolder/router';
 
 const App = () => {
   return (
-    <LogIn />
+    // <LogIn />
     // <SignUp />
     // <ForgatePassword />
+    <RouteApp />
+    // <View style={{ height: '100%', width: "100%", backgroundColor: ' red' }}>
+    //   <Text style={{ fontSize: 40 }}>hello</Text>
+    // </View>
   );
 };
 

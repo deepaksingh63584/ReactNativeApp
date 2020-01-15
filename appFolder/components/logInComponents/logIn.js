@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, CheckBox } from 'react-native';
 import logInCss from "./logInCss";
 import { OutlinedTextField } from 'react-native-material-textfield';
 import { Button } from 'react-native-elements';
@@ -10,9 +10,9 @@ class LogIn extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            emailid: "",
-            password: "",
-            showpassword: "false",
+            emailId: "",
+            passwordItem: "",
+            showpassword: false,
             errors: {},
         };
 
@@ -52,23 +52,35 @@ class LogIn extends Component {
                             <OutlinedTextField
                                 label='Password'
                                 value={this.state.passwordItem}
+                                secureTextEntry={!this.state.showpassword}
                                 onChangeText={(passwordItem) => this.setState({ passwordItem })}
                                 error={this.state.errors.password}
                                 errorColor='red'
                                 helperText={this.state.errors.passwordItem}
                             />
                         </View>
+                        <View className='showPassword' style={logInCss.showPassword}>
+                            <CheckBox
+                                value={this.state.showpassword}
+                                onChange={() => this.setState({ showpassword: !this.state.showpassword ? true : false })} />
+                            <Text style={{ marginTop: 5 }}>Show Password</Text>
+                        </View>
                     </View>
                     <View>
                         <Button
                             title="Forgate Password"
                             type="clear"
+                            onPress={() =>
+                                this.props.navigation.navigate('ForgatePassword')}
                         />
                     </View>
                     <View className="linkButton" style={logInCss.linkButton}>
                         <View className="registerButton" style={logInCss.registerButton} >
                             <Button
-                                title="     Register       "
+                                title="Create Account"
+                                type="clear"
+                                onPress={() =>
+                                    this.props.navigation.navigate('SignUp')}
                             />
                         </View>
                         <View className="nextButton" style={logInCss.nextButton}>
@@ -123,14 +135,24 @@ class LogIn extends Component {
         return validform;
     }
 
-    submitForm(event) {
-        event.preventDefault();
+    submitForm = () => {
         if (this.validation()) {
-            this.setState({
-                [event.target.name]: event.target.value,
-                [event.target.formvalid]: !event.target.formvalid
-            })
-            toDashboard(this.state.emailid, this.state.password);
+            // this.setState({
+            //     [this.props.name]: this.props.value,
+            //     [this.props.formvalid]: !this.props.formvalid
+            // })
+            toDashboard(this.state.emailId, this.state.passwordItem,
+                () => {
+                    this.props.navigation.navigate('DashBoard')
+                },
+                (errors) => {
+                    this.setState({
+                        errors: errors
+                    })
+                });
+
+
+            //console.warn(this.state.emailId + '   : ' + this.state.passwordItem)
         }
     }
 }

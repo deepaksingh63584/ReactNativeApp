@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, Button } from 'react-native';
+import { Text, View, ScrollView, Button, CheckBox } from 'react-native';
 import logInCss from "./logInCss";
 import { OutlinedTextField } from 'react-native-material-textfield';
-import { newUser } from './logInFireBase'
+import { resisterUser } from './logInFireBase'
 
 
 class SignUp extends Component {
@@ -14,7 +14,7 @@ class SignUp extends Component {
             emailId: '',
             passwordItem: '',
             confirmPass: '',
-            showpassword: 'false',
+            showpassword: false,
             errors: {},
         };
     }
@@ -74,6 +74,7 @@ class SignUp extends Component {
                             <OutlinedTextField
                                 label='Password'
                                 value={this.state.passwordItem}
+                                secureTextEntry={!this.state.showpassword}
                                 onChangeText={(passwordItem) => this.setState({ passwordItem })}
                                 error={this.state.errors.password}
                                 errorColor='red'
@@ -84,11 +85,19 @@ class SignUp extends Component {
                             <OutlinedTextField
                                 label='Confirm Password'
                                 value={this.state.confirmPass}
+                                secureTextEntry={!this.state.showpassword}
                                 onChangeText={(confirmPass) => this.setState({ confirmPass })}
                                 error={this.state.errors.confirmPassword}
                                 errorColor='red'
                                 helperText={this.state.errors.confirmPass}
                             />
+                        </View>
+                        <View className='showPassword' style={logInCss.showPassword}>
+                            <CheckBox
+                                value={this.state.showpassword}
+                                onChange={() => this.setState({ showpassword: !this.state.showpassword ? true : false })}
+                            />
+                            <Text style={{ marginTop: 5 }}>Show Password</Text>
                         </View>
                     </View>
                     <View style={{ justifyContent: "flex-end", alignItems: 'flex-end', padding: 45 }}>
@@ -164,18 +173,15 @@ class SignUp extends Component {
         return validform;
     }
 
-    register = (event) => {
-        //console.log('resi1');
-
-        event.preventDefault();
+    register = () => {
         if (this.validation()) {
             this.setState({
-                [event.target.name]: event.target.value,
-                [event.target.formvalid]: !event.target.formvalid
+                [this.props.name]: this.props.value,
+                [this.props.formvalid]: !this.props.formvalid
             })
-            //console.log('caling user data');
-            newUser(this.state.firstName, this.state.lastName, this.state.emailId, this.state.passwordItem);
+            resisterUser(this.state.firstName, this.state.lastName, this.state.emailId, this.state.passwordItem);
         }
+        alert("Registered successfully")
     }
 }
 export default SignUp;

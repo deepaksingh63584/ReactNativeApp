@@ -4,7 +4,8 @@ export default StyleSheet.create({
 
     signupfullView: {
         width: '100%',
-        // backgroundColor: 'yellow'
+        height: '100%',
+        // backgroundColor: 'lightyellow'
     },
 
     initialView: {
@@ -42,6 +43,10 @@ export default StyleSheet.create({
         marginLeft: 70,
         justifyContent: 'flex-end',
         alignItems: 'flex-end',
+    },
+
+    showPassword: {
+        flexDirection: 'row'
     }
 
 

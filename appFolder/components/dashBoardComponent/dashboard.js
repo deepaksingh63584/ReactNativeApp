@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, Button } from 'react-native';
+
 class Dashboard extends Component {
 
     render() {
         return (
-            <ScrollView>
+            <ScrollView >
                 <Text>
-                    Welcome to the dashBoard
+                    <h1>Welcome to the dashBoard</h1>
                 </Text>
             </ScrollView>
         )

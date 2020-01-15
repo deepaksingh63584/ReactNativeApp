@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, ScrollView, Button } from 'react-native';
 import logInCss from "./logInCss";
 import { OutlinedTextField } from 'react-native-material-textfield';
-
+import { forgatePassword } from './logInFireBase'
 
 class ForgatePassword extends Component {
     constructor(props) {
@@ -48,7 +48,7 @@ class ForgatePassword extends Component {
                     <View style={{ justifyContent: "flex-end", alignItems: 'flex-end', padding: 45, marginTop: 110 }}>
                         <Button
                             title="       Next        "
-                            onPress={this.validateEmail}
+                            onPress={this.submitForm}
                         />
                     </View>
 
@@ -78,6 +78,20 @@ class ForgatePassword extends Component {
             errors: errors
         });
         return validform;
+    }
+
+    submitForm = () => {
+        if (this.validateEmail()) {
+            forgatePassword(this.state.emailId,
+                () => {
+                    this.props.navigation.navigate('LogIn')
+                },
+                (errors) => {
+                    this.setState({
+                        errors: errors
+                    })
+                });
+        }
     }
 }
 export default ForgatePassword;
