@@ -12,7 +12,7 @@ class SignUp extends Component {
             firstName: '',
             lastName: '',
             emailId: '',
-            passwordItem: '',
+            password: '',
             confirmPass: '',
             showpassword: false,
             errors: {},
@@ -73,12 +73,12 @@ class SignUp extends Component {
                         <View className="textView" style={logInCss.textView}>
                             <OutlinedTextField
                                 label='Password'
-                                value={this.state.passwordItem}
+                                value={this.state.password}
                                 secureTextEntry={!this.state.showpassword}
-                                onChangeText={(passwordItem) => this.setState({ passwordItem })}
+                                onChangeText={(password) => this.setState({ password })}
                                 error={this.state.errors.password}
                                 errorColor='red'
-                                helperText={this.state.errors.passwordItem}
+                                helperText={this.state.errors.password}
                             />
                         </View>
                         <View className="textView" style={logInCss.textView}>
@@ -141,13 +141,13 @@ class SignUp extends Component {
             }
         }
 
-        if (!this.state.passwordItem) {
+        if (!this.state.password) {
             validform = false;
             errors["password"] = "*Please enter your password.";
         }
 
-        if (typeof this.state.passwordItem !== "undefined") {
-            if (!this.state.passwordItem.match(/^.*(?=.{6,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/)) {
+        if (typeof this.state.password !== "undefined") {
+            if (!this.state.password.match(/^.*(?=.{6,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/)) {
                 validform = false;
                 errors["password"] = "*Please enter secure and strong password.";
             }
@@ -159,7 +159,7 @@ class SignUp extends Component {
         }
 
         if (typeof this.state.confirmPass !== "undefined") {
-            if (this.state.confirmPass !== this.state.passwordItem) {
+            if (this.state.confirmPass !== this.state.password) {
                 validform = false;
                 errors["confirmPassword"] = "*Password does not match.";
             }
@@ -175,13 +175,16 @@ class SignUp extends Component {
 
     register = () => {
         if (this.validation()) {
-            this.setState({
-                [this.props.name]: this.props.value,
-                [this.props.formvalid]: !this.props.formvalid
-            })
-            resisterUser(this.state.firstName, this.state.lastName, this.state.emailId, this.state.passwordItem);
+            resisterUser(this.state.firstName, this.state.lastName, this.state.emailId, this.state.password,
+                () => {
+                    this.props.navigation.navigate('LogIn')
+                },
+                (errors) => {
+                    this.setState({
+                        errors: errors
+                    })
+                });
         }
-        alert("Registered successfully")
     }
 }
 export default SignUp;

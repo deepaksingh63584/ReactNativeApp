@@ -3,17 +3,23 @@ import { View, Text } from 'react-native'
 import LogIn from './appFolder/components/logInComponents/logIn';
 import SignUp from './appFolder/components/logInComponents/signUp';
 import ForgatePassword from './appFolder/components/logInComponents/forgatePassword';
+import DashBoard from './appFolder/components/dashBoardComponent/dashboard'
 import RouteApp from './appFolder/router';
+import Dashboard from './appFolder/components/dashBoardComponent/dashboard';
+import Searchbar from './searchbar'
 
 const App = () => {
   return (
     // <LogIn />
     // <SignUp />
     // <ForgatePassword />
-    <RouteApp />
+    <Dashboard />
+    // <RouteApp />
     // <View style={{ height: '100%', width: "100%", backgroundColor: ' red' }}>
     //   <Text style={{ fontSize: 40 }}>hello</Text>
     // </View>
+    // <Searchbar />
+
   );
 };
 

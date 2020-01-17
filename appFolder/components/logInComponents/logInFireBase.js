@@ -1,13 +1,15 @@
 import logInFireBase from '../firebase'
 
 
-export function resisterUser(firstname, lastname, emailid, passworditem) {
+export function resisterUser(firstname, lastname, emailid, passworditem, thencallback) {
     logInFireBase.auth().createUserWithEmailAndPassword(emailid, passworditem).then((success) => {
         logInFireBase.database().ref('/users/' + success.user.uid + '/personalData/').set({
             firstName: firstname,
             lastName: lastname,
-            emailId: emailid
+            emailId: emailid,
+
         })
+        thencallback()
     })
 
 }
