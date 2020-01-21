@@ -1,26 +1,12 @@
 import React from 'react';
-import { View, Text } from 'react-native'
-import LogIn from './appFolder/components/logInComponents/logIn';
-import SignUp from './appFolder/components/logInComponents/signUp';
-import ForgatePassword from './appFolder/components/logInComponents/forgatePassword';
-import DashBoard from './appFolder/components/dashBoardComponent/dashboard'
-import RouteApp from './appFolder/router';
-import Dashboard from './appFolder/components/dashBoardComponent/dashboard';
-import Searchbar from './searchbar'
-
+import RootNavigator from './appFolder/RootNavigator';
+import DrawerContent from './appFolder/components/dashBoardComponent/DrawerContent';
+import NoteCard from './appFolder/components/notesComponents/NoteCard'
 const App = () => {
-  return (
-    // <LogIn />
-    // <SignUp />
-    // <ForgatePassword />
-    <Dashboard />
-    // <RouteApp />
-    // <View style={{ height: '100%', width: "100%", backgroundColor: ' red' }}>
-    //   <Text style={{ fontSize: 40 }}>hello</Text>
-    // </View>
-    // <Searchbar />
+  // return < DrawerContent />
+  return <RootNavigator />
+  // return <NoteCard />
 
-  );
 };
 
 export default App;

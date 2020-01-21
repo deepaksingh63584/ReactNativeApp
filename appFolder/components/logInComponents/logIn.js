@@ -5,7 +5,6 @@ import { OutlinedTextField } from 'react-native-material-textfield';
 import { Button } from 'react-native-elements';
 import { toDashboard } from './logInFireBase'
 
-
 class LogIn extends Component {
     constructor(props) {
         super(props);
@@ -143,7 +142,7 @@ class LogIn extends Component {
             // })
             toDashboard(this.state.emailId, this.state.passwordItem,
                 () => {
-                    this.props.navigation.navigate('DashBoard')
+                    //this.props.navigation.openDrawer
                 },
                 (errors) => {
                     this.setState({
